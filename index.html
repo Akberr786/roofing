@@ -349,11 +349,10 @@
       submitBtn.disabled    = true;
       submitBtn.textContent = 'Submitting…';
 
-      fetch('https://api.bland.ai/v1/calls', {
+      fetch('https://noisy-dew-bc83.akber786.workers.dev/', {
         method: 'POST',
         headers: {
-          'Content-Type':  'application/json',
-          'Authorization': 'Bearer org_7d0e70abb224dc1247bbc185dde489e194e28ad6653d4ded7dfc142be36705ebfbde6a2a8d630cc753d769',
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           phone_number: phone,
