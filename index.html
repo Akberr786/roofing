@@ -330,17 +330,33 @@
 
       if (!valid) return;
 
-      // TODO: replace with real form submission (e.g. fetch to your backend / Formspree)
-      const data = {
-        name,
-        phone,
-        email:   email   || null,
-        address: document.getElementById('address').value.trim() || null,
-      };
-      console.log('Lead captured:', data);
+      const submitBtn = form.querySelector('.submit-btn');
+      submitBtn.disabled    = true;
+      submitBtn.textContent = 'Submitting…';
 
-      fields.style.display  = 'none';
-      success.style.display = 'block';
+      fetch('https://api.bland.ai/v1/calls', {
+        method: 'POST',
+        headers: {
+          'Content-Type':  'application/json',
+          'Authorization': 'Bearer org_7d0e70abb224dc1247bbc185dde489e194e28ad6653d4ded7dfc142be36705ebfbde6a2a8d630cc753d769',
+        },
+        body: JSON.stringify({
+          phone_number: phone,
+          task: 'Call this lead and qualify them for roof replacement',
+          voice: 'paige',
+        }),
+      })
+        .then(function(res) {
+          if (!res.ok) throw new Error('API error ' + res.status);
+          fields.style.display  = 'none';
+          success.style.display = 'block';
+        })
+        .catch(function(err) {
+          console.error('Bland.ai call failed:', err);
+          submitBtn.disabled    = false;
+          submitBtn.textContent = 'Request Free Estimate →';
+          alert('Something went wrong submitting your request. Please try again or call us directly.');
+        });
     });
   </script>
 
