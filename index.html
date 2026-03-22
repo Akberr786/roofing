@@ -240,10 +240,17 @@
     <form id="leadForm" novalidate>
       <div id="formFields">
 
-        <div class="field">
-          <label for="name">Full Name</label>
-          <input type="text" id="name" name="name" placeholder="Jane Smith" autocomplete="name" />
-          <div class="error-msg" id="nameError">Please enter your name.</div>
+        <div style="display:flex; gap:1rem;">
+          <div class="field" style="flex:1">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" name="firstName" placeholder="Jane" autocomplete="given-name" />
+            <div class="error-msg" id="firstNameError">Please enter your first name.</div>
+          </div>
+          <div class="field" style="flex:1">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lastName" placeholder="Smith" autocomplete="family-name" />
+            <div class="error-msg" id="lastNameError">Please enter your last name.</div>
+          </div>
         </div>
 
         <div class="field">
@@ -301,17 +308,25 @@
     form.addEventListener('submit', function(e) {
       e.preventDefault();
 
-      const name  = document.getElementById('name').value.trim();
-      const phone = document.getElementById('phone').value.trim();
-      const email = document.getElementById('email').value.trim();
+      const firstName = document.getElementById('firstName').value.trim();
+      const lastName  = document.getElementById('lastName').value.trim();
+      const phone     = document.getElementById('phone').value.trim();
+      const email     = document.getElementById('email').value.trim();
 
       let valid = true;
 
-      if (!name) {
-        showError('name', 'nameError', true);
+      if (!firstName) {
+        showError('firstName', 'firstNameError', true);
         valid = false;
       } else {
-        showError('name', 'nameError', false);
+        showError('firstName', 'firstNameError', false);
+      }
+
+      if (!lastName) {
+        showError('lastName', 'lastNameError', true);
+        valid = false;
+      } else {
+        showError('lastName', 'lastNameError', false);
       }
 
       if (!phone || !isValidPhone(phone)) {
@@ -342,7 +357,7 @@
         },
         body: JSON.stringify({
           phone_number: phone,
-          task: 'Call ' + name + ' and qualify them for roof replacement',
+          task: 'Call ' + firstName + ' and qualify them for roof replacement',
           voice: 'paige',
         }),
       })
