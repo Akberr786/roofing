@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Peak Roofing Co. — Free Estimates</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red:    #c0392b;
+      --dark:   #1a1a1a;
+      --gray:   #4a4a4a;
+      --light:  #f5f5f5;
+      --border: #ddd;
+      --radius: 6px;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      color: var(--dark);
+      background: #fff;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--dark);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .logo {
+      color: #fff;
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .logo span { color: var(--red); }
+    nav a {
+      color: #ccc;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    nav a:hover { color: #fff; }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 60%, #3a1a1a 100%);
+      color: #fff;
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--red);
+    }
+    .hero p {
+      font-size: 1.1rem;
+      color: #bbb;
+      max-width: 540px;
+      margin: 0 auto 2rem;
+    }
+    .hero-cta {
+      display: inline-block;
+      background: var(--red);
+      color: #fff;
+      padding: 0.75rem 2rem;
+      border-radius: var(--radius);
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .hero-cta:hover { background: #a93226; }
+
+    /* ── TRUST BAR ── */
+    .trust-bar {
+      background: var(--red);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+      padding: 1rem 2rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .trust-bar span::before {
+      content: '✓  ';
+    }
+
+    /* ── LEAD FORM SECTION ── */
+    .form-section {
+      padding: 4rem 2rem;
+      background: var(--light);
+    }
+    .form-section h2 {
+      text-align: center;
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .form-section .sub {
+      text-align: center;
+      color: var(--gray);
+      margin-bottom: 2.5rem;
+      font-size: 0.95rem;
+    }
+
+    form {
+      max-width: 520px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      padding: 2.5rem 2rem;
+    }
+
+    .field {
+      margin-bottom: 1.25rem;
+    }
+    label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      color: var(--dark);
+    }
+    label .opt {
+      font-weight: 400;
+      color: #888;
+      font-size: 0.8rem;
+      margin-left: 4px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 0.65rem 0.85rem;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 1rem;
+      font-family: inherit;
+      color: var(--dark);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      background: #fff;
+    }
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--red);
+      box-shadow: 0 0 0 3px rgba(192,57,43,0.12);
+    }
+    input.error { border-color: #e74c3c; }
+
+    .error-msg {
+      font-size: 0.78rem;
+      color: #e74c3c;
+      margin-top: 0.3rem;
+      display: none;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 0.85rem;
+      background: var(--red);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .submit-btn:hover { background: #a93226; }
+    .submit-btn:active { transform: scale(0.99); }
+
+    .success-msg {
+      display: none;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+    .success-msg .checkmark {
+      font-size: 3rem;
+      color: #27ae60;
+    }
+    .success-msg h3 { font-size: 1.4rem; margin: 0.75rem 0 0.5rem; }
+    .success-msg p  { color: var(--gray); font-size: 0.95rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      color: #888;
+      text-align: center;
+      padding: 1.5rem 2rem;
+      font-size: 0.85rem;
+    }
+    footer a { color: #aaa; }
+
+    @media (max-width: 480px) {
+      nav { padding: 0 1rem; }
+      form { padding: 1.75rem 1.25rem; }
+      .trust-bar { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">Peak<span>Roofing</span></div>
+    <a href="#get-estimate">Free Estimate</a>
+  </nav>
+
+  <section class="hero">
+    <h1>Protect Your Home With<br><em>Expert Roofing</em></h1>
+    <p>Licensed, insured, and trusted by homeowners across the region. Fast turnaround. Honest pricing.</p>
+    <a href="#get-estimate" class="hero-cta">Get a Free Estimate</a>
+  </section>
+
+  <div class="trust-bar">
+    <span>Licensed &amp; Insured</span>
+    <span>Free Inspections</span>
+    <span>20+ Years Experience</span>
+    <span>Same-Day Response</span>
+  </div>
+
+  <section class="form-section" id="get-estimate">
+    <h2>Get Your Free Estimate</h2>
+    <p class="sub">Fill out the form below and we'll be in touch within one business day.</p>
+
+    <form id="leadForm" novalidate>
+      <div id="formFields">
+
+        <div class="field">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" placeholder="Jane Smith" autocomplete="name" />
+          <div class="error-msg" id="nameError">Please enter your name.</div>
+        </div>
+
+        <div class="field">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" placeholder="(555) 000-0000" autocomplete="tel" />
+          <div class="error-msg" id="phoneError">Please enter a valid phone number.</div>
+        </div>
+
+        <div class="field">
+          <label for="email">Email Address <span class="opt">(optional)</span></label>
+          <input type="email" id="email" name="email" placeholder="jane@example.com" autocomplete="email" />
+          <div class="error-msg" id="emailError">Please enter a valid email address.</div>
+        </div>
+
+        <div class="field">
+          <label for="address">Property Address <span class="opt">(optional)</span></label>
+          <input type="text" id="address" name="address" placeholder="123 Main St, City, State" autocomplete="street-address" />
+        </div>
+
+        <button type="submit" class="submit-btn">Request Free Estimate &rarr;</button>
+      </div>
+
+      <div class="success-msg" id="successMsg">
+        <div class="checkmark">&#10003;</div>
+        <h3>We've got your request!</h3>
+        <p>Someone from our team will reach out to you shortly.</p>
+      </div>
+    </form>
+  </section>
+
+  <footer>
+    &copy; 2026 PeakRoofing Co. &mdash; <a href="tel:+15550000000">(555) 000-0000</a>
+  </footer>
+
+  <script>
+    const form    = document.getElementById('leadForm');
+    const fields  = document.getElementById('formFields');
+    const success = document.getElementById('successMsg');
+
+    function showError(inputId, errorId, show) {
+      const input = document.getElementById(inputId);
+      const msg   = document.getElementById(errorId);
+      input.classList.toggle('error', show);
+      msg.style.display = show ? 'block' : 'none';
+    }
+
+    function isValidPhone(val) {
+      return /^\+?[\d\s\-().]{7,15}$/.test(val.trim());
+    }
+
+    function isValidEmail(val) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val.trim());
+    }
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const name  = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const email = document.getElementById('email').value.trim();
+
+      let valid = true;
+
+      if (!name) {
+        showError('name', 'nameError', true);
+        valid = false;
+      } else {
+        showError('name', 'nameError', false);
+      }
+
+      if (!phone || !isValidPhone(phone)) {
+        showError('phone', 'phoneError', true);
+        valid = false;
+      } else {
+        showError('phone', 'phoneError', false);
+      }
+
+      if (email && !isValidEmail(email)) {
+        showError('email', 'emailError', true);
+        valid = false;
+      } else {
+        showError('email', 'emailError', false);
+      }
+
+      if (!valid) return;
+
+      // TODO: replace with real form submission (e.g. fetch to your backend / Formspree)
+      const data = {
+        name,
+        phone,
+        email:   email   || null,
+        address: document.getElementById('address').value.trim() || null,
+      };
+      console.log('Lead captured:', data);
+
+      fields.style.display  = 'none';
+      success.style.display = 'block';
+    });
+  </script>
+
+</body>
+</html>
