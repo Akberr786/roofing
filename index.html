@@ -357,7 +357,10 @@
         body: JSON.stringify({
           phone_number: phone,
           task: 'Call ' + firstName + ' and qualify them for roof replacement',
-          voice: 'paige',
+          voice: 'paige',  
+          wait_for_greeting :  true,
+          interruption_threshold: 600,
+          background_track: 'office',
         }),
       })
         .then(function(res) {
